@@ -9,19 +9,15 @@ require("cord")
 -- https://github.com/Seeed-Studio/Starter_Shield/blob/master/libraries/TickTockShieldV2/TTSDisplay.cpp
 --
 -- USAGE:
--- lcd = require "starterShildLCD"
+-- d = require "starterShildDisplay"
 -- d:init()
 -- d:num(8888)    -- display a number
 -- d:time(12, 34) -- display time
 -- d:clear()      -- clear display
-
 --------------------------------------------------------------------------------
-
-require("bit")
 
 local Display = {}
 
--- TODO: these pins probably need to be changed for the firestorm board
 -- default pin values
 local PINCLK = storm.io.D7 -- pin of clk
 local PINDTA = storm.io.D8 -- pin of data
@@ -39,8 +35,6 @@ local BRIGHTEST      = 7
 --Special characters index of tube table
 local INDEX_NEGATIVE_SIGH = 16
 local INDEX_BLANK         = 17
-
---  0~9,A,b,C,d,E,F,"-"," "
 
 local setpin = storm.io.set
 local getpin = storm.io.get
