@@ -2,8 +2,6 @@
 require("storm")
 require("cord")
 
-local shield = {}
-
 --------------------------------------------------------------------------------
 -- Display module
 -- provides access to the 7-segment display
@@ -90,8 +88,13 @@ end
 
 --  display a number in range 0 - 9999
 function Display:num(dta)
+   if not dta then
+      self:clear()
+      return true
+   end
+
    if dta < 0 or dta > 9999 then
-      return
+      return false
    end
 
    --clear()
@@ -117,19 +120,21 @@ function Display:num(dta)
       self:display(2, (dta / 10) % 10)
       self:display(1, dta % 10)
    end
+   return true
 end
 
 function Display:time(hour, min)
-   if hour > 24 or hour < 0 then
-      return
+   if not hour or hour > 24 or hour < 0 then
+      return false
    end
-   if min > 60 or min < 0  then
-      return
+   if not min or min > 60 or min < 0  then
+      return false
    end
    self:display(4, hour / 10)
    self:display(3, hour % 10)
    self:display(2, min / 10)
    self:display(1, min % 10)
+   return true
 end
 
 function Display:clear()
@@ -137,6 +142,7 @@ function Display:clear()
    self:display(2, 0x7f)
    self:display(3, 0x7f)
    self:display(4, 0x7f)
+   return true
 end
 
 --  write a byte to tm1636
@@ -231,7 +237,4 @@ function Display:coding(DispData)
    return DispData
 end
 
-----------------------------------------------
-
-shield.Display = Display
-return shield
+return Display
