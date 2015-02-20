@@ -7,6 +7,14 @@ require("cord")
 -- provides access to the 7-segment display
 -- ported from:
 -- https://github.com/Seeed-Studio/Starter_Shield/blob/master/libraries/TickTockShieldV2/TTSDisplay.cpp
+--
+-- USAGE:
+-- lcd = require "starterShildLCD"
+-- d:init()
+-- d:num(8888)    -- display a number
+-- d:time(12, 34) -- display time
+-- d:clear()      -- clear display
+
 --------------------------------------------------------------------------------
 
 require("bit")
